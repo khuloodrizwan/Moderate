@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState } from 'react';
 import UserGrid from './UserGrid';
 import './usergrid.css';
@@ -35,18 +34,22 @@ const App = () => {
             <label htmlFor="role-filter" className="filter-label">
               Filter by Role:
             </label>
-            <select
-              id="role-filter"
-              value={selectedRole}
-              onChange={(e) => setSelectedRole(e.target.value)}
-              className="filter-select"
-            >
-              {roles.map(role => (
-                <option key={role} value={role}>
-                  {role}
-                </option>
-              ))}
-            </select>
+
+            <div className="custom-select-wrapper">
+              <select
+                id="role-filter"
+                value={selectedRole}
+                onChange={(e) => setSelectedRole(e.target.value)}
+                className="filter-select"
+              >
+                {roles.map((role) => (
+                  <option key={role} value={role}>
+                    {role}
+                  </option>
+                ))}
+              </select>
+              <div className="custom-arrow">▼</div>
+            </div>
           </div>
         </div>
 
