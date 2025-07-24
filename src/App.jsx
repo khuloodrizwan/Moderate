@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import React, { useState } from 'react';
+import UserGrid from './UserGrid';
+import './usergrid.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const users = [
+    { id: 1, name: 'Alice Johnson', role: 'Developer' },
+    { id: 2, name: 'Bob Smith', role: 'Designer' },
+    { id: 3, name: 'Carol Davis', role: 'Manager' },
+    { id: 4, name: 'David Wilson', role: 'Developer' },
+    { id: 5, name: 'Emma Brown', role: 'QA Tester' },
+    { id: 6, name: 'Frank Miller', role: 'DevOps' },
+    { id: 7, name: 'Grace Lee', role: 'Designer' },
+    { id: 8, name: 'Henry Taylor', role: 'Product Owner' },
+    { id: 9, name: 'Isabella Garcia', role: 'Marketing' },
+    { id: 10, name: 'Jack Anderson', role: 'Developer' },
+    { id: 11, name: 'Karen White', role: 'Sales' },
+    { id: 12, name: 'Liam Martinez', role: 'QA Tester' }
+  ];
+
+  const [selectedRole, setSelectedRole] = useState('All');
+  const roles = ['All', ...new Set(users.map(user => user.role))];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="app">
+      <div className="container">
+        <div className="header">
+          <h1 className="title">User Dashboard</h1>
+          <p className="subtitle">Responsive User Card Grid with Role Filtering</p>
+        </div>
 
-export default App
+        <div className="filter-section">
+          <div className="filter-group">
+            <label htmlFor="role-filter" className="filter-label">
+              Filter by Role:
+            </label>
+            <select
+              id="role-filter"
+              value={selectedRole}
+              onChange={(e) => setSelectedRole(e.target.value)}
+              className="filter-select"
+            >
+              {roles.map(role => (
+                <option key={role} value={role}>
+                  {role}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <UserGrid users={users} selectedRole={selectedRole} />
+      </div>
+    </div>
+  );
+};
+
+export default App;
